@@ -23,7 +23,8 @@ export function Login({navigation}: any) {
       const savedPassword = await AsyncStorage.getItem('password');
 
       if (username === savedUsername && password === savedPassword) {
-        console.log('logar');
+        await AsyncStorage.setItem('checkLoged', 'logado');
+        navigation.navigate('Movie');
       } else {
         Alert.alert('Nome de usuário ou senha incorretos.');
       }
