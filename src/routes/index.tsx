@@ -2,7 +2,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {ActivityIndicator, View} from 'react-native';
 import AppRoutes from './AppRoutes';
-import AuthNavigator from './AuthNavigator';
+// import AuthNavigator from './AuthNavigator';
 import {AuthUse} from '../context/auth';
 
 export function Routes() {
@@ -23,5 +23,7 @@ export function Routes() {
     );
   }
 
-  return checkLoged === 'logado' ? <AppRoutes /> : <AuthNavigator />;
+  return <AppRoutes />;
+
+  // return checkLoged === 'logado' ? <AppRoutes /> : <AuthNavigator />;
 }
