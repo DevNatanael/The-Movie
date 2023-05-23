@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Image, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React from 'react';
+import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const Movie = () => {
+export const Movie = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -22,17 +22,21 @@ const Movie = () => {
       <TouchableOpacity style={styles.buttonContainer}>
         <Text style={styles.buttonText}>GENERATE AGAIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.buttonContainer, styles.changeButton]} onPress={() => { navigation.navigate('Genres') }}>
+      <TouchableOpacity
+        style={[styles.buttonContainer, styles.changeButton]}
+        onPress={() => {
+          navigation.navigate('Genres');
+        }}>
         <Text style={[styles.buttonText, styles.changeButtonText]}>
           Change categories
         </Text>
       </TouchableOpacity>
-      <Image source={require("./assets/fade.png")} style={styles.fade} />
+      {/* <Image source={require('./assets/fade.png')} style={styles.fade} />
       <Image
-        source={require("./assets/poster.jpg")}
+        source={require('./assets/poster.jpg')}
         style={styles.poster}
         resizeMode="cover"
-      />
+      /> */}
     </View>
   );
 };
@@ -40,19 +44,19 @@ const Movie = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: 'black',
   },
   poster: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    position: "absolute",
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    position: 'absolute',
     zIndex: -2,
   },
   fade: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
     zIndex: -1,
     opacity: 0.9,
   },
@@ -61,56 +65,54 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   title: {
-    marginTop: "70%",
+    marginTop: '70%',
     fontSize: 24,
-    color: "white",
-    fontWeight: "bold",
+    color: 'white',
+    fontWeight: 'bold',
   },
   rating: {
     fontSize: 16,
-    color: "white",
+    color: 'white',
     marginTop: 5,
   },
   director: {
     fontSize: 16,
-    color: "white",
+    color: 'white',
     marginTop: 5,
   },
   writer: {
     fontSize: 16,
-    color: "white",
+    color: 'white',
     marginTop: 5,
   },
   actors: {
     fontSize: 16,
-    color: "white",
+    color: 'white',
     marginTop: 5,
   },
   buttonContainer: {
-    backgroundColor: "#B43239",
+    backgroundColor: '#B43239',
     borderRadius: 5,
     paddingVertical: 15,
     paddingHorizontal: 5,
     marginHorizontal: 20,
     marginTop: 50,
     width: 200,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   buttonText: {
     fontSize: 16,
-    color: "black",
-    fontWeight: "bold",
-    textAlign: "center",
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   changeButton: {
-    backgroundColor: "black",
-    borderColor: "black",
+    backgroundColor: 'black',
+    borderColor: 'black',
     marginTop: 1,
-    fontWeight: "light",
+    fontWeight: 'light',
   },
   changeButtonText: {
-    color: "#B43239",
+    color: '#B43239',
   },
 });
-
-export default Movie;
