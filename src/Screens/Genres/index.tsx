@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Button, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 export function Genres({navigation}: any) {
   function openScreen() {
@@ -21,6 +21,7 @@ export function Genres({navigation}: any) {
           Selecione seus <Text style={{color: '#B43239'}}>gêneros</Text>{' '}
           favoritos
         </Text>
+        <Button title="Filmes" onPress={openScreen} />
       </View>
     </View>
   );
