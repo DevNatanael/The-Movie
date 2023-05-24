@@ -4,7 +4,17 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 
 export function Genres({navigation}: any) {
-  const genres: any = [];
+  const [countGenre, setCountGenre] = useState(0);
+  const [genres, setGenres] = useState({
+    drama: '',
+    acao: '',
+    comedia: '',
+    terror: '',
+    ficCien: '',
+    romance: '',
+    suspense: '',
+    animacao: '',
+  });
 
   function openScreen() {
     navigation.navigate('Movie');
@@ -27,43 +37,101 @@ export function Genres({navigation}: any) {
       <View style={styles.genresArea}>
         <View style={styles.genresRow}>
           <TouchableOpacity
-            style={styles.buttomGenre}
-            onPress={() => genres.push('drama')}>
+            style={
+              genres.drama === 'drama'
+                ? styles.buttomGenreSelected
+                : styles.buttomGenre
+            }
+            onPress={() => {
+              if (countGenre === 3) {
+                console.log('esta cheio');
+              } else {
+                if (genres.drama === '') {
+                  setGenres(prevState => ({...prevState, drama: 'drama'}));
+                  setCountGenre(countGenre + 1);
+                } else {
+                  setGenres(prevState => ({...prevState, drama: ''}));
+                  setCountGenre(countGenre - 1);
+                }
+              }
+            }}>
             <Text style={styles.textGenre}>Drama</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={
+              genres.acao === 'action'
+                ? styles.buttomGenreSelected
+                : styles.buttomGenre
+            }
+            onPress={() => {
+              if (countGenre === 3) {
+                console.log('esta cheio');
+              } else {
+                if (genres.acao === '') {
+                  setGenres(prevState => ({...prevState, acao: 'action'}));
+                  setCountGenre(countGenre + 1);
+                } else {
+                  setGenres(prevState => ({...prevState, acao: ''}));
+                  setCountGenre(countGenre - 1);
+                }
+              }
+            }}>
             <Text style={styles.textGenre}>Ação</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.genresRow}>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, comedia: 'comedy'}))
+            }>
             <Text style={styles.textGenre}>Comédia</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, terror: 'horror'}))
+            }>
             <Text style={styles.textGenre}>Terror</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.genresRow}>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, ficCien: 'sci-fi'}))
+            }>
             <Text style={styles.textGenre}>Fic científica</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, romance: 'romance'}))
+            }>
             <Text style={styles.textGenre}>Romance</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.genresRow}>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, suspense: 'thriller'}))
+            }>
             <Text style={styles.textGenre}>Suspense</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttomGenre}>
+          <TouchableOpacity
+            style={styles.buttomGenre}
+            onPress={() =>
+              setGenres(prevState => ({...prevState, animacao: 'animation'}))
+            }>
             <Text style={styles.textGenre}>Animação</Text>
           </TouchableOpacity>
         </View>
       </View>
       <TouchableOpacity
         style={styles.buttomContinue}
-        onPress={() => console.log(genres)}>
+        onPress={() => console.log(genres, '||', countGenre)}>
         <Text style={styles.textBtnCon}>Avançar</Text>
       </TouchableOpacity>
     </View>
@@ -134,6 +202,14 @@ const styles = StyleSheet.create({
   },
   buttomGenre: {
     backgroundColor: '#fff',
+    width: '45%',
+    height: '75%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 2,
+  },
+  buttomGenreSelected: {
+    backgroundColor: '#B43239',
     width: '45%',
     height: '75%',
     justifyContent: 'center',
