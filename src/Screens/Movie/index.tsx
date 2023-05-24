@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-export const Movie = ({navigation}: any) => {
+export const Movie = ({navigation, route}: any) => {
+  console.log(route.params.paramKey, 'aqq');
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -31,12 +33,12 @@ export const Movie = ({navigation}: any) => {
           Change categories
         </Text>
       </TouchableOpacity>
-      {/* <Image source={require('./assets/fade.png')} style={styles.fade} />
+      <Image source={require('../../assets/fade.png')} style={styles.fade} />
       <Image
-        source={require('./assets/poster.jpg')}
+        source={require('../../assets/poster.jpg')}
         style={styles.poster}
         resizeMode="cover"
-      /> */}
+      />
     </View>
   );
 };
