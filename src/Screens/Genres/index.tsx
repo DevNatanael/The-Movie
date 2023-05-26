@@ -1,15 +1,24 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable eqeqeq */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 
 const apiKey = '8ff1cf2a';
 
 export function Genres({navigation}: any) {
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState<any>(null);
   const [movieRecommendation, setMovieRecommendation] = useState('');
   const [countGenre, setCountGenre] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [genres, setGenres] = useState<any>({
     drama: '',
     acao: '',
@@ -22,6 +31,7 @@ export function Genres({navigation}: any) {
   });
 
   function getRandomMoviesByGenres() {
+    setIsLoading(true);
     const genreKeys = Object.keys(genres);
     const promises = genreKeys.map(key => {
       const genre = genres[key];
@@ -74,9 +84,6 @@ export function Genres({navigation}: any) {
       return;
     }
     getRandomMoviesByGenres();
-    console.log(movie, '1');
-    //navigation.navigate('Movie', {paramKey: movie})
-    setTimeout(() => console.log(movie, '2'), 1000);
   }
 
   // async function logout() {
@@ -84,7 +91,12 @@ export function Genres({navigation}: any) {
   //   navigation.navigate('login');
   // }
 
-  useEffect(() => {}, [movie]);
+  useEffect(() => {
+    if (movie) {
+      setIsLoading(false);
+      navigation.navigate('Movie', {paramKey: movie});
+    }
+  }, [movie]);
 
   return (
     <View style={styles.container}>
@@ -319,7 +331,11 @@ export function Genres({navigation}: any) {
       <TouchableOpacity
         style={styles.buttomContinue}
         onPress={() => generateMovie()}>
-        <Text style={styles.textBtnCon}>Avançar</Text>
+        {isLoading ? (
+          <ActivityIndicator size={'small'} color={'#fff'} />
+        ) : (
+          <Text style={styles.textBtnCon}>Avançar</Text>
+        )}
       </TouchableOpacity>
     </View>
   );

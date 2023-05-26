@@ -6,9 +6,7 @@ import AppRoutes from './AppRoutes';
 import {AuthUse} from '../context/auth';
 
 export function Routes() {
-  const {checkLoged, loading} = AuthUse();
-
-  console.log(checkLoged, 'routes');
+  const {loading} = AuthUse();
 
   if (loading) {
     return (

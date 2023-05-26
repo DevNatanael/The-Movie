@@ -1,41 +1,47 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {translate} from '@vitalets/google-translate-api';
 
 export const Movie = ({navigation, route}: any) => {
-  console.log(route.params.paramKey, 'aqq');
+  const [translatedPlot, setTranslatedPlot] = useState('');
+  const dataMovie = route.params.paramKey;
+  const translatePlot = async () => {
+    const {text} = await translate(dataMovie.Plot, {to: 'pt'});
+    setTranslatedPlot(text);
+  };
+  useEffect(() => {
+    translatePlot();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
-        <Text style={styles.title}>Nós</Text>
-        <Text style={styles.rating}>Nota: 8.5</Text>
-        <Text style={styles.director}>
-          Adelaide e Gabe levam a família para passar um fim de semana na praia
-          e descansar. Eles começam a aproveitar o ensolarado local, mas a
-          chegada de um grupo misterioso muda tudo e a família se torna refém de
-          seres com aparências iguais às suas.
-        </Text>
-        <Text style={styles.director}>Diretor: John Doe</Text>
-        <Text style={styles.writer}>Roteirista: Jane Smith</Text>
-        <Text style={styles.actors}>
-          Atores: John Doe, Jane Smith, Bob Johnson
-        </Text>
+        <Text style={styles.title}>{dataMovie.Title}</Text>
+        <Text style={styles.rating}>Nota: {dataMovie.imdbRating}</Text>
+        <Text style={styles.director}>{translatedPlot}</Text>
+        <Text style={styles.director}>Diretor: {dataMovie.Director}</Text>
+        <Text style={styles.writer}>Roteirista: {dataMovie.Writer}</Text>
+        <Text style={styles.actors}>Atores: {dataMovie.Actors}</Text>
       </View>
-      <TouchableOpacity style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>GENERATE AGAIN</Text>
-      </TouchableOpacity>
       <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => {
+          navigation.navigate('Genres');
+        }}>
+        <Text style={styles.buttonText}>Gerar Outro Filme</Text>
+      </TouchableOpacity>
+      {/* <TouchableOpacity
         style={[styles.buttonContainer, styles.changeButton]}
         onPress={() => {
           navigation.navigate('Genres');
         }}>
         <Text style={[styles.buttonText, styles.changeButtonText]}>
-          Change categories
+          Mudar Categorias
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Image source={require('../../assets/fade.png')} style={styles.fade} />
       <Image
-        source={require('../../assets/poster.jpg')}
+        source={{uri: dataMovie?.Poster}}
         style={styles.poster}
         resizeMode="cover"
       />
