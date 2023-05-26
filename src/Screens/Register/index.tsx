@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 
-export function Register() {
+export function Register({navigation}: any) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,6 +39,9 @@ export function Register() {
       await AsyncStorage.setItem('username', username);
       await AsyncStorage.setItem('password', password);
       Alert.alert('Dados salvos com sucesso!');
+      setTimeout(() => {
+        navigation.navigate('login');
+      }, 1100);
     } catch (error) {
       console.log(error);
       Alert.alert('Erro ao salvar os dados.');
